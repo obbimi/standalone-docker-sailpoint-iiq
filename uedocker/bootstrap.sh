@@ -5,9 +5,10 @@
 
 #shopt -s extglob
 
-PROPERTIES_FILE="../ssb/envconfig/local-dev/build.properties"
-IIQ_VERSION=$(grep "IIQVersion" ${PROPERTIES_FILE} | cut -d '=' -f2)
-PATCH_LEVEL=$(grep "IIQPatchLevel" ${PROPERTIES_FILE} | cut -d '=' -f2)
+PROPERTIES_FILE="../ssb/envconfig/${2:-local-dev}/build.properties"
+IIQ_VERSION=$(grep -E "^IIQVersion"    ${PROPERTIES_FILE} | tail -1 | cut -d '=' -f2)
+PATCH_LEVEL=$(grep -E "^IIQPatchLevel" ${PROPERTIES_FILE} | tail -1 | cut -d '=' -f2)
+
 
 if [[ ! -z "${PATCH_LEVEL}" ]]
 then

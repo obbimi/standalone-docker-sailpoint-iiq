@@ -4,9 +4,7 @@
 SP_HOME="${SP_HOME:-/ue/iiq/tomcat/webapps/ue}"
 MYSQL_HOST="localhost"
 
-CREATION_SCRIPTS=(
-        "${SP_HOME}/WEB-INF/database/create_identityiq_tables.mysql"
-    )
+CREATION_SCRIPTS=( "$(ls -1 ${SP_HOME}/WEB-INF/database/create_identityiq_tables*.mysql)" )
 
 UPDATE_SCRIPTS=(
         "${SP_HOME}/WEB-INF/database/upgrade_identityiq_tables.mysql"
