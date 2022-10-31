@@ -37,7 +37,7 @@ docker-compose up -d || onFailure
 
 APP_CONTAINER_ID=$(docker-compose ps -q app)
 echo "#### Run extendedSchema"
-${WINPTY_BIN} docker exec -it --user root ${APP_CONTAINER_ID} bash -c 'source /ue/iiq/scripts/iiq-extendedSchema.sh' || onFailure
+${WINPTY_BIN} docker exec -it --user root ${APP_CONTAINER_ID} bash -c 'source /ue/iiq/scripts/iiq-extendedSchema.sh' # may fail for 8.1 apparently
 
 # modify the script './volumes/app-ue/WEB-INF/database/add_identityiq_extensions.mysql' to use smaller columns
 sed -i 's~add extended\(1[6-9]\|2[0-9]\) varchar.[0-9]*.~add extended\1 varchar(24)~' ./volumes/app-ue/WEB-INF/database/add_identityiq_extensions.mysql
