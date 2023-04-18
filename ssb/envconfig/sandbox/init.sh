@@ -1,5 +1,5 @@
 clientname=${1:-AGInsurance}
-clientconfigdir=${2:-/export/code/uprightsecurity/identityiq}
+clientconfigdir=${2:-/osshare/code/uprightsecurity/identityiq}
 
 cd $(dirname $0)
 cp -v ../local-dev/*iiq.properties sandbox.iiq.properties
@@ -9,13 +9,18 @@ echo ssb-v7
 echo $clientname
 ) >> components.txt
 
+if [[ ! -e ../../components/$clientname ]]; then
+    mkdir ../../components/$clientname
+    ln -s ${clientconfigdir}/config           ../../components/$clientname/.
+    ln -s ${clientconfigdir}/web              ../../components/$clientname/.
+else
+    echo "Already exists: $PWD/../../components/$clientname"
+fi
+ls -l ../../components/$clientname
 
-mkdir ../../components/$clientname
-ln -s ${clientconfigdir}/config           ../../components/$clientname/.
-ln -s ${clientconfigdir}/web              ../../components/$clientname/.
-
-
-ln -s  ${clientconfigdir}/sandbox.target.properties  .
+if [[ ! -e sandbox.target.properties ]]; then
+    ln -s ${clientconfigdir}/sandbox.target.properties .
+fi
 
 
 
