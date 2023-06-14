@@ -25,5 +25,5 @@ fi
 
 
 # there has to be a build.properies file with at least the versions to use
-cat ${clientconfigdir}/build.properties | grep -E '^IIQ' | grep -Evi '^IIQHOME' | tee -a build.properties
+cat ${clientconfigdir}/*build.properties | grep -E '^IIQ' | grep -Evi '^IIQHOME' | sort -u | tee -a build.properties
 
